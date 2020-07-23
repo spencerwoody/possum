@@ -92,4 +92,26 @@ devtools::load_all()
 
 mytry <- sparseLinearSummary(X, fhatmat, y, sigma2Samples)
 
+names(mytry)
+
+mytry$modelSize
+
+df2 <- mytry$summaryDf %>%
+  group_by(modelSize) %>%
+  summarize(phi_gamma_lo = quantile(phi_gamma, 0.05),
+            phi_gamma_hi = quantile(phi_gamma, 0.95),
+            phi_gamma_mid = mean(phi_gamma),
+            rsq_gamma_lo = quantile(rsq_gamma, 0.05),
+            rsq_gamma_hi = quantile(rsq_gamma, 0.95),
+            rsq_gamma_mid = mean(rsq_gamma))
+
+df2 %>%
+  ggplot(aes(modelSize, rsq_gamma_mid)) +
+  geom_linerange(aes(ymin = rsq_gamma_lo,
+                     ymax = rsq_gamma_hi)) + 
+  geom_point() +
+  labs()
+
+head(m)
+
 mytry$rsqGammaList
