@@ -1,0 +1,21 @@
+Package: possum
+Type: Package
+Title: Model interpretation using using lower-dimensional posterior summarization
+Version: 0.1
+Date: 2020-05-28
+Author: Spencer Woody, Carlos Carvalho, and Jared Murray
+Maintainer: Spencer Woody <spencer.woody@utexas.edu>
+Description: This package provides tools to interpret nonparametric ("black box") models using the technique of posterior summarization.  In short, this method takes takes as an input a vector fitted values of a regression model, and projects them down onto simpler structures. 
+License: GPL (>= 2)
+Imports: 
+    Rcpp,
+    ggplot2,
+    cowplot,
+    plyr,
+    dplyr,
+    tidyr,
+    reshape2,
+    lars,
+    stringr
+LinkingTo: Rcpp, RcppArmadillo
+RoxygenNote: 7.1.1
