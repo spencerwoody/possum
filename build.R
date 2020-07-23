@@ -17,6 +17,8 @@ pkgbuild::compile_dll()
 ## Check that package can be build
 devtools::check()
 
+devtools::check_built()
+
 ## Create Rd files
 devtools::document()
 

@@ -2,7 +2,7 @@
 ##' Description
 ##'
 ##' Details
-##' @title
+##' @title A function for computing the summary R-squared
 ##' @param gamma fitted values of summary (vector or matrix)
 ##' @param fhat fitted values from regression function (vector or
 ##'   matrix)

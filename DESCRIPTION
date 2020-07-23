@@ -16,6 +16,8 @@ Imports:
     tidyr,
     reshape2,
     lars,
-    stringr
+    stringr,
+    horseshoe,
+    devtools
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 7.1.1

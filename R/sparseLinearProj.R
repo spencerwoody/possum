@@ -17,10 +17,10 @@ linearProjection <- function(X, betaSamples, selectedVars) {
 }
 
 
-##' .. content for \description{} (no empty lines) ..
+##' Description
 ##'
-##' .. content for \details{} ..
-##' @title
+##' Details
+##' @title Sparse Linear Projection
 ##' @param X 
 ##' @param y 
 ##' @param betaSamples 
