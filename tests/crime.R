@@ -91,3 +91,5 @@ fhatmat <- t(cbart$yhat.train)
 devtools::load_all()
 
 mytry <- sparseLinearSummary(X, fhatmat, y, sigma2Samples)
+
+mytry$rsqGammaList
