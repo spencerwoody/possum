@@ -38,8 +38,6 @@ sparseLinearSummary <-
            ...) {
 
 
-    cat("I'm here!\n")
-
     p <- ncol(X)
 
     if (any(is.na(varnames))) {
@@ -177,8 +175,6 @@ sparseLinearSummary <-
       mutate(modelSize = modelSizeFull) %>%
       dplyr::select(-Var1)
 
-    cat("I'm here!\n")
-
 
 
 
@@ -298,6 +294,7 @@ sparseLinearSummary <-
       summaryDfCI = summaryDfCI,
       summaryDfOld = summaryDfOld,
       summaryDfOldCI = summaryDfOldCI,
+      varnamesDf = varnamesDf,
       eeDf = eeDf,
       modelSize = modelSize
     )

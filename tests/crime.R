@@ -90,9 +90,37 @@ fhatmat <- t(cbart$yhat.train)
 
 devtools::load_all()
 
-mytry <- sparseLinearSummary(X, fhatmat, y, sigma2Samples)
+mytry <- sparseLinearSummary(X, fhatmat, y, sigma2Samples, varnames = varnames)
 
 names(mytry)
+
+mytry$betaProjDf %>% head()
+
+mydf <- mytry$betaProjDf %>%
+  filter(modelSize == 8)
+
+mydfboth <- rbind(mydf %>% mutate(model = "bart"),
+                  sparseProj$betaProjDf %>%
+                  filter(modelSize == 6) %>%
+                  mutate(model = "linear"))
+
+
+
+mydf %>%
+  left_join(mytry$varnamesDf) %>%
+  glimpse() %>% 
+  filter(value!=0) %>% 
+  ggplot() +
+  geom_hline(yintercept = 0) + 
+  geom_violin(aes(varname, value))
+
+mydfboth %>%
+  left_join(mytry$varnamesDf) %>%
+  glimpse() %>% 
+  filter(value!=0) %>% 
+  ggplot() +
+  geom_hline(yintercept = 0) + 
+  geom_violin(aes(varname, value, fill = model))
 
 mytry$modelSize
 
