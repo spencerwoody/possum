@@ -1,0 +1,112 @@
+---
+title: "Using the `possum` package: California housing price example"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{my-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, message=FALSE, warning=FALSE, results='hide'}
+library(ggplot2)
+library(dplyr)
+library(stringr)
+library(cowplot)
+theme_set(theme_minimal_grid())
+library(mgcv)
+library(dbarts)
+library(possum)
+
+
+```
+
+## Load and prepare California housing data
+
+```{r data_clean}
+data(calif)
+glimpse(calif)
+
+## Outcome: log median house values by census tract
+y <- log(calif$Median_house_value) 
+
+## Dataframe of regressors, and log income and pop
+califDf <- calif %>%
+  dplyr::select(Median_household_income,
+                POPULATION,
+                Median_rooms,
+                LONGITUDE,
+                LATITUDE) %>%
+  mutate(Median_household_income = log(Median_household_income),
+         POPULATION = log(POPULATION))
+
+## Convert regressors to matrix
+x <- califDf %>% as.matrix()
+
+
+
+
+```
+
+## Estimate Bayesian nonparametric regression model
+
+```{r bart, message=FALSE, warning=FALSE, results='hide'}
+
+mybart <- bart(x, y, ndpost=1000, nskip=1000, nchain = 1)
+
+## Posterior and posterior mean for fitted values
+yhat <- mybart$yhat.train.mean
+yhatSamples <- t(mybart$yhat.train)
+
+
+```
+
+## Construct and plot additive summary
+
+First, define the summary. Here, we look at the individual additive effects of
+each of the five covariates.
+
+```{r possum1}
+
+summaryform <- yhat ~ s(Median_household_income) + s(POPULATION) +
+  s(Median_rooms) + s(LONGITUDE) + s(LATITUDE)
+
+```
+
+Now, we estimate and plot the summary.
+
+```{r plot}
+mypossum <- possum1(summaryform, yhatSamples, yhat, califDf, verbose=TRUE)
+
+possum_plot1(mypossum)
+
+```
+
+Look at triangles:
+
+```{r, warning = FALSE}
+
+possum_triangle1(mypossum)
+
+```
+
+
+## Summary diagnostics
+
+Summary R-sq
+
+```{r}
+hist(mypossum$summaryRsq, main = "", xlab = "Summary R-sq")
+```
+
+<!-- comment -->
+
+
+[possum]: https://www.tandfonline.com/doi/abs/10.1080/10618600.2020.1796684?journalCode=ucgs20
+[sw]: https://spencerwoody.github.io/

@@ -2,7 +2,7 @@
 % Please edit documentation in R/sparseLinearSummary.R
 \name{sparseLinearSummary}
 \alias{sparseLinearSummary}
-\title{Sparse linear summarie}
+\title{Sparse linear summaries}
 \usage{
 sparseLinearSummary(
   X,

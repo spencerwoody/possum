@@ -21,7 +21,7 @@ devtools::install_github("spencerwoody/possum")
 ## Contact
 
 [Spencer Woody][sw]  
-`spencer (dot) woody (at) utexas (dot) edu`
+`spencer(dot)woody(at)utexas(dot)edu`
 
 [arxiv]: https://arxiv.org/abs/1905.07103
 [JCGS]: https://www.tandfonline.com/doi/abs/10.1080/10618600.2020.1796684?journalCode=ucgs20

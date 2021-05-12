@@ -20,7 +20,7 @@ linearProjection2 <- function(X, fhatmat, selectedVars) {
 ##' Description
 ##'
 ##' Details
-##' @title Sparse linear summarie
+##' @title Sparse linear summaries
 ##' @param X 
 ##' @param fhatmat 
 ##' @param y 

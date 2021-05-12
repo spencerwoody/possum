@@ -17,21 +17,22 @@ linearProjection <- function(X, betaSamples, selectedVars) {
 }
 
 
-##' Description
+##' This is like DSS
 ##'
 ##' Details
-##' @title Sparse Linear Projection
-##' @param X 
-##' @param y 
-##' @param betaSamples 
-##' @param sigma2Samples 
+##' @title Sparse Linear Projection (a la Hahn & Carvalho, 2015)
+##' @param X
+##' @param y
+##' @param betaSamples
+##' @param sigma2Samples
 ##' @param adaptive if TRUE (default), use adaptive lasso, weighting
 ##'   by the postserior mean
-##' @param varnames 
-##' @param alpha 
+##' @param varnames
+##' @param alpha
 ##' @param ... other arguments, e.g., to glmnet
 ##' @return
 ##' @author Spencer Woody
+##' @export
 sparseLinearProj <- function(X, y, betaSamples, sigma2Samples,
                        adaptive = TRUE, varnames = NA, alpha = 0.05,
                        ...) {

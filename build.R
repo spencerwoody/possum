@@ -14,13 +14,15 @@ usethis::use_rcpp_armadillo()
 pkgbuild::clean_dll()
 pkgbuild::compile_dll()
 
+
+
+## Create Rd files
+devtools::document()
+
 ## Check that package can be build
 devtools::check()
 
 devtools::check_built()
-
-## Create Rd files
-devtools::document()
 
 ## Install locally
 devtools::install(upgrade = "always")

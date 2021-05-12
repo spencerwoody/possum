@@ -2,7 +2,7 @@
 % Please edit documentation in R/sparseLinearProj.R
 \name{sparseLinearProj}
 \alias{sparseLinearProj}
-\title{Sparse Linear Projection}
+\title{Sparse Linear Projection (a la Hahn & Carvalho, 2015)}
 \usage{
 sparseLinearProj(
   X,
@@ -16,20 +16,8 @@ sparseLinearProj(
 )
 }
 \arguments{
-\item{X}{}
-
-\item{y}{}
-
-\item{betaSamples}{}
-
-\item{sigma2Samples}{}
-
 \item{adaptive}{if TRUE (default), use adaptive lasso, weighting
 by the postserior mean}
-
-\item{varnames}{}
-
-\item{alpha}{}
 
 \item{...}{other arguments, e.g., to glmnet}
 }
@@ -37,7 +25,7 @@ by the postserior mean}
 
 }
 \description{
-Description
+This is like DSS
 }
 \details{
 Details

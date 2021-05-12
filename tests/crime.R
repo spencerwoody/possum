@@ -6,10 +6,11 @@ library(dplyr)
 library(lars)
 library(stringr)
 library(tidyr)
+library(latex2exp)
 
 theme_set(theme_minimal_grid())
 
-devtools::load_all()
+## devtools::load_all()
 
 ###############################################################################
                                         #         Prepare UScrime data        #
@@ -50,7 +51,7 @@ betaSamples <- fit$BetaSamples
 betaSamples <- fit$BetaSamples
 sigma2Samples <- fit$Sigma2Samples
 
-devtools::load_all()
+## devtools::load_all()
 
 sparseProj <- sparseLinearProj(X, y,
                                betaSamples, sigma2Samples,
@@ -69,10 +70,16 @@ df <- sparseProj$summaryDf %>%
 
 df %>%
   ggplot(aes(modelSize, rsq_gamma_mid)) +
-  geom_point() 
+  geom_point() +
+  labs(x="Summary size", y = TeX("$R^{2}_{\\gamma}$"))
 
 sparseProj$summaryDf %>% head()
 sparseProj$summaryDfLong %>% head()
+
+sparseProj$betaProjDf %>%
+  filter(modelSize == 6) %>% 
+  ggplot() +
+  geom_violin(aes(varname, value))
 
 
 ###############################################################################
@@ -88,7 +95,7 @@ plot(cbart$yhat.train.mean, y)
 yhatmat <- t(cbart$yhat.train)
 fhatmat <- t(cbart$yhat.train)
 
-devtools::load_all()
+## devtools::load_all()
 
 mytry <- sparseLinearSummary(X, fhatmat, y, sigma2Samples, varnames = varnames)
 
@@ -96,13 +103,18 @@ names(mytry)
 
 mytry$betaProjDf %>% head()
 
-mydf <- mytry$betaProjDf %>%
-  filter(modelSize == 8)
+mytry$betaProjDf %>% glimpse()
 
-mydfboth <- rbind(mydf %>% mutate(model = "bart"),
-                  sparseProj$betaProjDf %>%
-                  filter(modelSize == 6) %>%
-                  mutate(model = "linear"))
+mydf <- mytry$betaProjDf %>%
+  filter(modelSize == 6)
+
+mydfboth <- rbind(
+  mydf %>%
+  ## filter(modelSize == 6) %>% 
+  mutate(model = "bart"),
+  sparseProj$betaProjDf %>%
+  filter(modelSize == 6) %>%
+  mutate(model = "linear"))
 
 
 
