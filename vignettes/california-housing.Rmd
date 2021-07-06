@@ -58,7 +58,7 @@ x <- califDf %>% as.matrix()
 
 ```{r bart, message=FALSE, warning=FALSE, results='hide'}
 
-mybart <- bart(x, y, ndpost=1000, nskip=1000, nchain = 1)
+mybart <- bart(x, y, ndpost=100, nskip=100, nchain = 1)
 
 ## Posterior and posterior mean for fitted values
 yhat <- mybart$yhat.train.mean
@@ -82,9 +82,9 @@ summaryform <- yhat ~ s(Median_household_income) + s(POPULATION) +
 Now, we estimate and plot the summary.
 
 ```{r plot}
-mypossum <- possum1(summaryform, yhatSamples, yhat, califDf, verbose=TRUE)
+mypossum <- additive_summary(summaryform, yhatSamples, yhat, califDf, verbose=TRUE)
 
-possum_plot1(mypossum)
+additive_summary_plot(mypossum)
 
 ```
 
@@ -92,7 +92,7 @@ Look at triangles:
 
 ```{r, warning = FALSE}
 
-possum_triangle1(mypossum)
+additive_summary_triangle_plot(mypossum)
 
 ```
 
