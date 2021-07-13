@@ -2,7 +2,7 @@
 ##' .. content for \description{} (no empty lines) ..
 ##'
 ##' .. content for \details{} ..
-##' @title possum1
+##' @title additive_summary
 ##' @param summaryCall
 ##' @param fhatSamples
 ##' @param fhat
@@ -12,7 +12,7 @@
 ##' @param verbose
 ##' @return
 ##' @author Spencer Woody
-possum1 <- function(summaryCall,
+additive_summary <- function(summaryCall,
                              fhatSamples,
                              fhat = rowMeans(fhatSamples),
                              df = NULL,
@@ -122,7 +122,7 @@ possum1 <- function(summaryCall,
     gamTerm[[j]] <- gamTermjPost
 
     # gamDfLongList[[length(gamDfList)]]
-
+    
     gamDfList[[length(gamDfList) + 1]] <- data.frame(
       term = gamTerms[j],
       x_j = df[, gamTerms[j]],
@@ -136,7 +136,7 @@ possum1 <- function(summaryCall,
       fx_j_hi80 = apply(gamTermjPost, 1, quantile, probs = 1 - 0.20 / 2),
       fx_j_lo50 = apply(gamTermjPost, 1, quantile, probs = 0.50 / 2),
       fx_j_hi50 = apply(gamTermjPost, 1, quantile, probs = 1 - 0.50 / 2),
-      fx_res=y-(rowSums(gamFitTerms[, !str_detect(colnames(gamFitTerms), gamTerms[j])]) + coef(gamFit)["(Intercept)"]),
+      fx_res=fhat-(rowSums(gamFitTerms[, !str_detect(colnames(gamFitTerms), gamTerms[j])]) + coef(gamFit)["(Intercept)"]),
       meta = meta
     )
 

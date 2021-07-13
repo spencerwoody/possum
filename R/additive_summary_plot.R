@@ -1,15 +1,15 @@
 
-##' .. content for \description{} (no empty lines) ..
+##' Plots the results of an additive summary
 ##'
-##' .. content for \details{} ..
-##' @title Plot
-##' @param possum1
+##' Plots the partial/adjusted effect curves from an additive summary
+##' @title Plot an additive summary
+##' @param additive_summary
+##' @param ribbonFill 
 ##' @return
 ##' @author Spencer Woody
-possum_plot1 <- function(possum1) {
-  ribbonFill <- "grey80"
+additive_summary_plot <- function(additive_summary, ribbonFill = "grey80") {
 
-  possum1$gamDf %>%
+  additive_summary$gamDf %>%
     ggplot() +
     geom_hline(yintercept = 0) +
     geom_ribbon(aes(x_j, ymin = fx_j_lo, ymax = fx_j_hi),
