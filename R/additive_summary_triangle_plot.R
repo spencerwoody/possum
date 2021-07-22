@@ -6,7 +6,7 @@
 ##' @author Spencer Woody
 ##'
 ##' @export
-possum_triangle1 <- function(possum1) {
+additive_summary_triangle_plot <- function(possum1) {
 
   possum1$triangleDf %>%
   ggplot() +

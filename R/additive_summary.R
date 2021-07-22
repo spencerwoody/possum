@@ -167,6 +167,8 @@ additive_summary <- function(summaryCall,
   }
 
   triangleDf <- triangleDfList %>% plyr::rbind.fill()
+  
+  # cat("Correlation of summary with original fit:", round(sqrt(summary(gamFit)$r.sq, 3), "\n"))
 
   ## Output
   list(
