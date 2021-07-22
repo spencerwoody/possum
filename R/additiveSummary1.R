@@ -1,7 +1,6 @@
-
-##' .. content for \description{} (no empty lines) ..
+##' .. content for description{} (no empty lines) ..
 ##'
-##' .. content for \details{} ..
+##' .. content for details{} ..
 ##' @title  Additive summary
 ##' @param gamcall 
 ##' @param yhatSamples 

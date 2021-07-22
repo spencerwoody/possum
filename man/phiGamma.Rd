@@ -20,7 +20,7 @@ phiGamma(y, gamma, sigma)
 Inflation of sigma
 }
 \details{
-.. content for \details{} ..
+.. content for details{} ..
 }
 \author{
 Spencer Woody
