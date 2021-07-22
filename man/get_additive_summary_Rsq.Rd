@@ -13,5 +13,5 @@ get_additive_summary_Rsq(possum_fit)
 A vector of posterior samples
 }
 \description{
-Return the posterior summary R^2 diagnostic
+Returns posterior samples of the R^2 diagnostic for psoterior summaries
 }

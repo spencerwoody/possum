@@ -2,7 +2,7 @@
 % Please edit documentation in R/helpers.R
 \name{get_additive_factor_posterior}
 \alias{get_additive_factor_posterior}
-\title{Return posterior samples of the coefficients on factor variables in a generalized additive posterior summary}
+\title{Return posterior summaries of categorical variables}
 \usage{
 get_additive_factor_posterior(possum_fit)
 }
