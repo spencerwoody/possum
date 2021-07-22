@@ -1,8 +1,8 @@
 
 ## TODO: Add functionality for factors
-##' .. content for \description{} (no empty lines) ..
+##' .. content for description{} (no empty lines) ..
 ##'
-##' .. content for \details{} ..
+##' .. content for details{} ..
 ##' @title Projection
 ##' @param gamcall
 ##' @param fhatSamples
