@@ -1,7 +1,7 @@
 
 ##' Inflation of sigma
 ##'
-##' .. content for \details{} ..
+##' .. content for details{} ..
 ##' @title Inflation of stdev
 ##' @param y 
 ##' @param gamma 

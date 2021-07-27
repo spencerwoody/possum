@@ -7,6 +7,11 @@ Author: Spencer Woody, Carlos Carvalho, and Jared Murray
 Maintainer: Spencer Woody <spencer.woody@utexas.edu>
 Description: This package provides tools to interpret nonparametric ("black box") models using the technique of posterior summarization.  In short, this method takes takes as an input a vector fitted values of a regression model, and projects them down onto simpler structures. 
 License: GPL (>= 2)
+Depends:
+    ggplot2,
+    mgcv,
+    stringr,
+    fastDummies
 Imports: 
     Rcpp,
     ggplot2,
@@ -21,7 +26,8 @@ Imports:
     devtools,
     latex2exp,
     dbarts,
-    here
+    here,
+    fastDummies
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 7.1.1
 Suggests: 

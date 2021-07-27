@@ -1,7 +1,7 @@
 
-##' .. content for \description{} (no empty lines) ..
+##' .. content for description{} (no empty lines) ..
 ##'
-##' .. content for \details{} ..
+##' .. content for details{} ..
 ##' @title additive_summary
 ##' @param summaryCall
 ##' @param fhatSamples
@@ -167,6 +167,8 @@ additive_summary <- function(summaryCall,
   }
 
   triangleDf <- triangleDfList %>% plyr::rbind.fill()
+  
+  # cat("Correlation of summary with original fit:", round(sqrt(summary(gamFit)$r.sq, 3), "\n"))
 
   ## Output
   list(

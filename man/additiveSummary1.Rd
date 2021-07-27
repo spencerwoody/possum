@@ -26,10 +26,10 @@ additiveSummary1(
 
 }
 \description{
-.. content for \description{} (no empty lines) ..
+.. content for description{} (no empty lines) ..
 }
 \details{
-.. content for \details{} ..
+.. content for details{} ..
 }
 \author{
 Spencer Woody

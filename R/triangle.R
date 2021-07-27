@@ -1,6 +1,6 @@
-##' .. content for \description{} (no empty lines) ..
+##' .. content for description{} (no empty lines) ..
 ##'
-##' .. content for \details{} ..
+##' .. content for details{} ..
 ##' @title Triangles
 ##' @param x
 ##' @param fsamples
