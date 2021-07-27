@@ -156,7 +156,7 @@
 <a href="#estimate-bayesian-nonparametric-regression-model" class="anchor"></a>Estimate Bayesian nonparametric regression model</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
-<span class="va">mybart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dbarts/man/bart.html">bart</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, ndpost<span class="op">=</span><span class="fl">1000</span>, nskip<span class="op">=</span><span class="fl">1000</span>, nchain <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="va">mybart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dbarts/man/bart.html">bart</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, ndpost<span class="op">=</span><span class="fl">100</span>, nskip<span class="op">=</span><span class="fl">100</span>, nchain <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 
 <span class="co">## Posterior and posterior mean for fitted values</span>
 <span class="va">yhat</span> <span class="op">&lt;-</span> <span class="va">mybart</span><span class="op">$</span><span class="va">yhat.train.mean</span>
@@ -172,7 +172,7 @@
   <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html">s</a></span><span class="op">(</span><span class="va">Median_rooms</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html">s</a></span><span class="op">(</span><span class="va">LONGITUDE</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html">s</a></span><span class="op">(</span><span class="va">LATITUDE</span><span class="op">)</span></code></pre></div>
 <p>Now, we estimate and plot the summary.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mypossum</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/possum1.html">possum1</a></span><span class="op">(</span><span class="va">summaryform</span>, <span class="va">yhatSamples</span>, <span class="va">yhat</span>, <span class="va">califDf</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">mypossum</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/additive_summary.html">additive_summary</a></span><span class="op">(</span><span class="va">summaryform</span>, <span class="va">yhatSamples</span>, <span class="va">yhat</span>, <span class="va">califDf</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; Calculating point estimate for the summary...</span>
 <span class="co">#&gt; Extracting terms of summary...</span>
 <span class="co">#&gt; Looping through factors...</span>
@@ -192,12 +192,12 @@
 <span class="co">#&gt; Triangle 4 out of 5...</span>
 <span class="co">#&gt; Triangle 5 out of 5...</span>
 
-<span class="fu"><a href="../reference/possum_plot1.html">possum_plot1</a></span><span class="op">(</span><span class="va">mypossum</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="../reference/additive_summary_plot.html">additive_summary_plot</a></span><span class="op">(</span><span class="va">mypossum</span><span class="op">)</span></code></pre></div>
 <p><img src="california-housing_files/figure-html/plot-1.png" width="700"></p>
 <p>Look at triangles:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
-<span class="fu"><a href="../reference/possum_triangle1.html">possum_triangle1</a></span><span class="op">(</span><span class="va">mypossum</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="../reference/additive_summary_triangle_plot.html">additive_summary_triangle_plot</a></span><span class="op">(</span><span class="va">mypossum</span><span class="op">)</span></code></pre></div>
 <p><img src="california-housing_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 </div>
 <div id="summary-diagnostics" class="section level2">

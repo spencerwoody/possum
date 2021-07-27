@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Triangles — triangle • possum</title>
+<title>Return posterior summaries of categorical variables — get_additive_factor_posterior • possum</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Triangles — triangle" />
-<meta property="og:description" content=".. content for description (no empty lines) .." />
+<meta property="og:title" content="Return posterior summaries of categorical variables — get_additive_factor_posterior" />
+<meta property="og:description" content="Return posterior samples of the coefficients on factor variables in a generalized additive posterior summary" />
 
 
 
@@ -115,29 +115,29 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Triangles</h1>
+    <h1>Return posterior summaries of categorical variables</h1>
     
-    <div class="hidden name"><code>triangle.Rd</code></div>
+    <div class="hidden name"><code>get_additive_factor_posterior.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>.. content for description (no empty lines) ..</p>
+    <p>Return posterior samples of the coefficients on factor variables in a generalized additive posterior summary</p>
     </div>
 
-    <pre class="usage"><span class='fu'>triangle</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>fsamples</span>, num_quantiles <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_additive_factor_posterior</span><span class='op'>(</span><span class='va'>possum_fit</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>possum_fit</th>
+      <td><p>A posterior summary object (e.g. as returned by additive_summary)</p></td>
+    </tr>
+    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-
-
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>.. content for details ..</p>
-    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
-
-    <p>Spencer Woody</p>
+    <p>A matrix of posterior samples, with one column per coefficient</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

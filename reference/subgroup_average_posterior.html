@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Triangles — triangle • possum</title>
+<title>subgroup_average_posterior — subgroup_average_posterior • possum</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Triangles — triangle" />
-<meta property="og:description" content=".. content for description (no empty lines) .." />
+<meta property="og:title" content="subgroup_average_posterior — subgroup_average_posterior" />
+<meta property="og:description" content="Aggregate posterior draws into subgroups by a factor" />
 
 
 
@@ -115,29 +115,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Triangles</h1>
+    <h1>subgroup_average_posterior</h1>
     
-    <div class="hidden name"><code>triangle.Rd</code></div>
+    <div class="hidden name"><code>subgroup_average_posterior.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>.. content for description (no empty lines) ..</p>
+    <p>Aggregate posterior draws into subgroups by a factor</p>
     </div>
 
-    <pre class="usage"><span class='fu'>triangle</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>fsamples</span>, num_quantiles <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>subgroup_average_posterior</span><span class='op'>(</span><span class='va'>posterior_samples</span>, <span class='va'>groups</span>, weights <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>posterior_samples</th>
+      <td><p>A matrix of posterior samples, with MCMC draws down the rows</p></td>
+    </tr>
+    <tr>
+      <th>groups</th>
+      <td><p>A factor defining the desired subgroups. Must have length ncol(posterior_samples)</p></td>
+    </tr>
+    <tr>
+      <th>weights</th>
+      <td><p>Optional weights, for computing a weighted subgroup average</p></td>
+    </tr>
+    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-
-
+    <p>A matrix of size (number of MCMC samples) x (number of subgroups) 
+containing posterior draws of the subgroup averages</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>.. content for details ..</p>
-    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
-
-    <p>Spencer Woody</p>
+    <p>Aggregate posterior draws into subgroups by a factor and return a new
+matrix of posterior draws for the subgroup (weighted) average</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
