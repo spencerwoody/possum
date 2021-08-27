@@ -5,7 +5,6 @@
 ##' @return
 ##' @author Spencer Woody
 ##'
-##' @export
 rsq <- function(y, yhat) {
   ssr <- sum((y - yhat)^2)
   sst <- sum((y - mean(y))^2)

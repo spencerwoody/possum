@@ -7,11 +7,13 @@
 get_additive_summary_Rsq(possum_fit)
 }
 \arguments{
-\item{possum_fit}{A posterior summary object (e.g. returned by additive_summary)}
+\item{possum_fit}{A posterior summary object (e.g. returned by
+additive_summary)}
 }
 \value{
 A vector of posterior samples
 }
 \description{
-Returns posterior samples of the R^2 diagnostic for psoterior summaries
+Returns posterior samples of the R^2 diagnostic for psoterior
+summaries
 }

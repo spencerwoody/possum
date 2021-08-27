@@ -58,7 +58,9 @@ x <- califDf %>% as.matrix()
 
 ```{r bart, message=FALSE, warning=FALSE, results='hide'}
 
-mybart <- bart(x, y, ndpost=100, nskip=100, nchain = 1)
+set.seed(1)
+
+mybart <- bart(x, y, ndpost=1000, nskip=1000, nchain = 1)
 
 ## Posterior and posterior mean for fitted values
 yhat <- mybart$yhat.train.mean
@@ -73,7 +75,6 @@ First, define the summary. Here, we look at the individual additive effects of
 each of the five covariates.
 
 ```{r possum1}
-
 summaryform <- yhat ~ s(Median_household_income) + s(POPULATION) +
   s(Median_rooms) + s(LONGITUDE) + s(LATITUDE)
 
@@ -82,6 +83,13 @@ summaryform <- yhat ~ s(Median_household_income) + s(POPULATION) +
 Now, we estimate and plot the summary.
 
 ```{r plot}
+## Check the dimensions of posterior of yhat (matrix) and the
+## posterior mean (vector)
+
+length(yhat)
+dim(yhatSamples) #NOTE: Each *column* is a posterior draw
+
+
 mypossum <- additive_summary(summaryform, yhatSamples, yhat, califDf, verbose=TRUE)
 
 additive_summary_plot(mypossum)

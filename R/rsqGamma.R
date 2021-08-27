@@ -8,7 +8,6 @@
 ##'   matrix)
 ##' @return
 ##' @author Spencer Woody
-##' @export
 rsqGamma <- function(gamma, fhat) {
 
   if (!is.matrix(gamma)) {

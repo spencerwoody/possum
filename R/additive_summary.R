@@ -3,7 +3,9 @@
 ##'
 ##' .. content for details{} ..
 ##' @title additive_summary
-##' @param summaryCall
+##' @param summaryCall A gam fomula for the additive summary to be
+##'   computed.  Should be in the form of fhat ~ s(x1) + s(x2) + ....
+##'   See ?mgcv::formula.gam
 ##' @param fhatSamples
 ##' @param fhat
 ##' @param df
