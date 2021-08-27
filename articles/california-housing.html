@@ -156,7 +156,9 @@
 <a href="#estimate-bayesian-nonparametric-regression-model" class="anchor"></a>Estimate Bayesian nonparametric regression model</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
-<span class="va">mybart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dbarts/man/bart.html">bart</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, ndpost<span class="op">=</span><span class="fl">100</span>, nskip<span class="op">=</span><span class="fl">100</span>, nchain <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
+
+<span class="va">mybart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dbarts/man/bart.html">bart</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, ndpost<span class="op">=</span><span class="fl">1000</span>, nskip<span class="op">=</span><span class="fl">1000</span>, nchain <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 
 <span class="co">## Posterior and posterior mean for fitted values</span>
 <span class="va">yhat</span> <span class="op">&lt;-</span> <span class="va">mybart</span><span class="op">$</span><span class="va">yhat.train.mean</span>
@@ -167,12 +169,20 @@
 <a href="#construct-and-plot-additive-summary" class="anchor"></a>Construct and plot additive summary</h2>
 <p>First, define the summary. Here, we look at the individual additive effects of each of the five covariates.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="va">summaryform</span> <span class="op">&lt;-</span> <span class="va">yhat</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html">s</a></span><span class="op">(</span><span class="va">Median_household_income</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html">s</a></span><span class="op">(</span><span class="va">POPULATION</span><span class="op">)</span> <span class="op">+</span>
+<code class="sourceCode R"><span class="va">summaryform</span> <span class="op">&lt;-</span> <span class="va">yhat</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html">s</a></span><span class="op">(</span><span class="va">Median_household_income</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html">s</a></span><span class="op">(</span><span class="va">POPULATION</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html">s</a></span><span class="op">(</span><span class="va">Median_rooms</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html">s</a></span><span class="op">(</span><span class="va">LONGITUDE</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html">s</a></span><span class="op">(</span><span class="va">LATITUDE</span><span class="op">)</span></code></pre></div>
 <p>Now, we estimate and plot the summary.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mypossum</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/additive_summary.html">additive_summary</a></span><span class="op">(</span><span class="va">summaryform</span>, <span class="va">yhatSamples</span>, <span class="va">yhat</span>, <span class="va">califDf</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
+<code class="sourceCode R"><span class="co">## Check the dimensions of posterior of yhat (matrix) and the</span>
+<span class="co">## posterior mean (vector)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">yhat</span><span class="op">)</span>
+<span class="co">#&gt; [1] 7481</span>
+<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">yhatSamples</span><span class="op">)</span> <span class="co">#NOTE: Each *column* is a posterior draw</span>
+<span class="co">#&gt; [1] 7481 1000</span>
+
+
+<span class="va">mypossum</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/additive_summary.html">additive_summary</a></span><span class="op">(</span><span class="va">summaryform</span>, <span class="va">yhatSamples</span>, <span class="va">yhat</span>, <span class="va">califDf</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; Calculating point estimate for the summary...</span>
 <span class="co">#&gt; Extracting terms of summary...</span>
 <span class="co">#&gt; Looping through factors...</span>
