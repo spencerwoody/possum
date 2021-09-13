@@ -1,0 +1,116 @@
+---
+title: "Sparse linear summaries for nonparametric regression models"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{my-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, message=FALSE, warning=FALSE, results='hide'}
+library(ggplot2)
+library(dplyr)
+library(stringr)
+library(cowplot)
+theme_set(theme_minimal_grid())
+library(mgcv)
+library(dbarts)
+library(possum)
+library(lars)
+library(reshape2)
+library(tidyr)
+
+```
+
+## Load and prepare US crime data
+
+```{r data_clean}
+data(UScrime, package = "MASS")
+
+glimpse(UScrime)
+
+y <- UScrime %>%
+  pull(y) %>%
+  scale()
+
+## Covariates
+X <- UScrime[, -which(colnames(UScrime) == "y")] %>%
+  as.matrix()
+
+## log-transform and scale the data
+X[, -2] <- log(X[, -2])
+
+X <- scale(X)
+
+varnames <- colnames(X)
+
+varnamesDf <- data.frame(
+  Var1 = seq_along(varnames),
+  varname = varnames
+)
+```
+
+## Estimate Bayesian nonparametric regression model
+
+```{r bart, message=FALSE, warning=FALSE, results='hide'}
+set.seed(420)
+
+cbart <- bart(X, y)
+
+sigma2Samples <- cbart$sigma^2
+
+rsq(y, cbart$yhat.train.mean)
+
+ggplot() +
+  geom_abline(intercept=0, slope=1, col="firebrick3") + 
+  geom_point(aes(y, cbart$yhat.train.mean)) + 
+  labs(x = "y", y = "yhat")
+
+fhatmat <- t(cbart$yhat.train)
+
+## devtools::load_all()
+
+lin <- sparseLinearSummary(X, fhatmat, y, sigma2Samples, varnames = varnames)
+
+names(lin)
+
+lin$summaryDfCI %>% 
+  filter(stat == "rsq_gamma") %>%
+  ggplot(aes(modelSize, mid)) +
+  geom_linerange(aes(ymin = lo,
+                     ymax = hi)) + 
+  geom_point() +
+  # facet_wrap(~stat, ncol=1, scales = "free_y") +
+  labs(x = "Summary size", y = "Summary R-sq")
+
+```
+
+The "elbow point" is about 7. 
+
+```{r}
+# Posterior mean and credible intervals for this summary
+lin$betaProjSummary %>% filter(modelSize == 7)
+
+# Poster plot for the summary
+lin$betaProjDf %>%
+  filter(modelSize == 7) %>% 
+  filter(value!=0) %>%
+  ggplot() +
+  geom_hline(yintercept=0) + 
+  geom_violin(aes(varname, value))
+```
+
+
+
+<!-- comment -->
+
+
+[possum]: https://www.tandfonline.com/doi/abs/10.1080/10618600.2020.1796684?journalCode=ucgs20
+[sw]: https://spencerwoody.github.io/

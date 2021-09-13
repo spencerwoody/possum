@@ -53,9 +53,17 @@ sigma2Samples <- fit$Sigma2Samples
 
 ## devtools::load_all()
 
+library(possum)
+
+library(reshape2)
+
 sparseProj <- sparseLinearProj(X, y,
                                betaSamples, sigma2Samples,
                                varnames = varnames)
+
+
+
+
 
 names(sparseProj)
 
@@ -106,7 +114,7 @@ mytry$betaProjDf %>% head()
 mytry$betaProjDf %>% glimpse()
 
 mydf <- mytry$betaProjDf %>%
-  filter(modelSize == 6)
+  filter(modelSize == 7)
 
 mydfboth <- rbind(
   mydf %>%
@@ -125,6 +133,15 @@ mydf %>%
   ggplot() +
   geom_hline(yintercept = 0) + 
   geom_violin(aes(varname, value))
+
+mydf %>%
+  left_join(mytry$varnamesDf) %>%
+  glimpse() %>% 
+  filter(value!=0) %>% 
+  ggplot() +
+  geom_hline(yintercept = 0) + 
+  geom_boxplot(aes(varname, value)) + 
+  labs(x = "Variable", y = "Average partial effect")
 
 mydfboth %>%
   left_join(mytry$varnamesDf) %>%
@@ -152,6 +169,5 @@ df2 %>%
   geom_point() +
   labs()
 
-head(m)
 
 mytry$rsqGammaList
