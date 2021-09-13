@@ -3,5 +3,6 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   california-housing: california-housing.html
-last_built: 2021-08-27T16:03Z
+  nonpara-sparse-linear-summary: nonpara-sparse-linear-summary.html
+last_built: 2021-09-13T19:34Z
 
