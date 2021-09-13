@@ -332,6 +332,6 @@ Temporary Items
 
 # R history file (who actually uses these files anyway?)
 .Rhistory
-docs
+# docs
 inst/doc
 .Rproj.user
