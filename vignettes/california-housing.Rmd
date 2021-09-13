@@ -2,7 +2,7 @@
 title: "Using the `possum` package: California housing price example"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{my-vignette}
+  %\VignetteIndexEntry{Using the `possum` package: California housing price example}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -107,7 +107,7 @@ additive_summary_triangle_plot(mypossum)
 
 ## Summary diagnostics
 
-Summary R-sq
+Summary R-sq, i.e., variance explained by summary.  
 
 ```{r}
 hist(mypossum$summaryRsq, main = "", xlab = "Summary R-sq")

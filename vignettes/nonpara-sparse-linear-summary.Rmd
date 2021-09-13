@@ -2,7 +2,7 @@
 title: "Sparse linear summaries for nonparametric regression models"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{nonpara-sparse-linear-summary}
+  %\VignetteIndexEntry{Sparse linear summaries for nonparametric regression models}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
