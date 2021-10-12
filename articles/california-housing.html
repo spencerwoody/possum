@@ -137,6 +137,7 @@
 <span class="co">#&gt; $ Median_household_income     &lt;int&gt; 111667, 66094, 87306, 62386, 55658, 38646,…</span>
 <span class="co">#&gt; $ Mean_household_income       &lt;int&gt; 195229, 105877, 106248, 74604, 73933, 5670…</span>
 <span class="co">#&gt; $ County                      &lt;chr&gt; "Alameda County", "Alameda County", "Alame…</span>
+
 <span class="co">## Outcome: log median house values by census tract</span>
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">calif</span><span class="op">$</span><span class="va">Median_house_value</span><span class="op">)</span> 
 
@@ -157,7 +158,8 @@
 <h2 class="hasAnchor">
 <a href="#estimate-bayesian-nonparametric-regression-model" class="anchor"></a>Estimate Bayesian nonparametric regression model</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
+<code class="sourceCode R">
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
 
 <span class="va">mybart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dbarts/man/bart.html">bart</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, ndpost<span class="op">=</span><span class="fl">1000</span>, nskip<span class="op">=</span><span class="fl">1000</span>, nchain <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 
@@ -181,6 +183,8 @@
 <span class="co">#&gt; [1] 7481</span>
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">yhatSamples</span><span class="op">)</span> <span class="co">#NOTE: Each *column* is a posterior draw</span>
 <span class="co">#&gt; [1] 7481 1000</span>
+
+
 <span class="va">mypossum</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/additive_summary.html">additive_summary</a></span><span class="op">(</span><span class="va">summaryform</span>, <span class="va">yhatSamples</span>, <span class="va">yhat</span>, <span class="va">califDf</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; Calculating point estimate for the summary...</span>
 <span class="co">#&gt; Extracting terms of summary...</span>
@@ -200,11 +204,13 @@
 <span class="co">#&gt; (100) less than unique values of x (70)</span>
 <span class="co">#&gt; Triangle 4 out of 5...</span>
 <span class="co">#&gt; Triangle 5 out of 5...</span>
+
 <span class="fu"><a href="../reference/additive_summary_plot.html">additive_summary_plot</a></span><span class="op">(</span><span class="va">mypossum</span><span class="op">)</span></code></pre></div>
 <p><img src="california-housing_files/figure-html/plot-1.png" width="700"></p>
 <p>Look at triangles:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/additive_summary_triangle_plot.html">additive_summary_triangle_plot</a></span><span class="op">(</span><span class="va">mypossum</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R">
+<span class="fu"><a href="../reference/additive_summary_triangle_plot.html">additive_summary_triangle_plot</a></span><span class="op">(</span><span class="va">mypossum</span><span class="op">)</span></code></pre></div>
 <p><img src="california-housing_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 </div>
 <div id="summary-diagnostics" class="section level2">
