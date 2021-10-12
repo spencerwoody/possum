@@ -3,4 +3,3 @@
 ##' @useDynLib possum, .registration = TRUE
 ##' usethis namespace: end
 NULL
-

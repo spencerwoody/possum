@@ -42,11 +42,11 @@ average_posterior = function(posterior_samples, weights = NULL) {
   
 }
 
-#' Title
+#' Difference_posterior
 #'
-#' @param posterior_samples 
-#' @param ref_col 
-#' @param remove_ref 
+#' @param posterior_samples Set of posterior samples
+#' @param ref_col Differences are taken as (each column) - (ref_col)
+#' @param remove_ref Remove the column of zeros corresponding to the reference column
 #'
 #' @return
 #' @export
