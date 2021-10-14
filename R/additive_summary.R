@@ -141,7 +141,7 @@ additive_summary <- function(summaryCall,
       fx_j_hi80 = apply(gamTermjPost, 1, quantile, probs = 1 - 0.20 / 2),
       fx_j_lo50 = apply(gamTermjPost, 1, quantile, probs = 0.50 / 2),
       fx_j_hi50 = apply(gamTermjPost, 1, quantile, probs = 1 - 0.50 / 2),
-      fx_res=fhat-(rowSums(gamFitTerms[, !str_detect(colnames(gamFitTerms), gamTerms[j])]) + coef(gamFit)["(Intercept)"]),
+      fx_res=fhat-(rowSums(gamFitTerms[, !str_detect(colnames(gamFitTerms), gamTerms[j]),drop=FALSE]) + coef(gamFit)["(Intercept)"]),
       meta = meta
     )
 
