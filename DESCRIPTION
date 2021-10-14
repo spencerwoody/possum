@@ -12,7 +12,8 @@ Depends:
     mgcv,
     stringr,
     fastDummies,
-    rpart
+    rpart,
+    dplyr
 Imports: 
     Rcpp,
     ggplot2,
