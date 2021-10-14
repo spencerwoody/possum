@@ -27,6 +27,9 @@ additive_summary <- function(summaryCall,
                              ## alpha = 0.10, ribbonFill = "grey50")
 {
 
+  ## TODO: improve formula interface by using update: update(. ~ u+v, res  ~ . ) #> res ~ u + v
+  
+  
   ## if (sapply(df, is.factor) %>% any()) warning("Looks like there are factors in your data.frame.\n If these, please be sure to explicitly ")
 
   ## Rename... (y not needed?)
@@ -164,7 +167,7 @@ additive_summary <- function(summaryCall,
 
   for (jay in 1:num_triangles) {
     if (verbose) cat (sprintf("Triangle %i out of %i...\n", jay, num_triangles))
-    myx <- df %>% pull(triangle_terms[jay])
+    myx <- df %>% dplyr::pull(triangle_terms[jay])
     triangleDfList[[jay]] <- triangle(myx, gamTerm[[triangle_terms[jay]]]) %>% mutate(term = triangle_terms[jay])
   }
 
