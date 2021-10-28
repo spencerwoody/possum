@@ -12,7 +12,9 @@ additive_summary_triangle_plot <- function(possum1) {
   ggplot() +
   geom_raster(aes(l, u, fill = prob)) +
   facet_wrap(~term) +
-  scale_fill_gradient2("", midpoint=0.5) +
+  scale_fill_gradientn(limits = c(0,1),
+                         colors = brewer.pal(7, "RdBu"),
+                         values = c(1, 0.85, 0.75, 0.5, 0.25, 0.15, 0)) +
   theme(legend.position = "bottom",
         axis.text.x = element_text(angle=90, vjust=0.5, hjust=0.5)) +
   guides(fill = guide_colorbar(barwidth = 12, barheight = 0.5)) +
