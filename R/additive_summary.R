@@ -13,7 +13,7 @@
 ##' @param verbose
 ##' @return
 ##' @author Spencer Woody
-additive_summary_local <- function(summaryCall,
+additive_summary <- function(summaryCall,
                                    fhatSamples,
                                    fhat = rowMeans(fhatSamples),
                                    df = NULL,
