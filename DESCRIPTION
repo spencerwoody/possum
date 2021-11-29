@@ -29,7 +29,7 @@ Imports:
     latex2exp,
     dbarts,
     here,
-    fastDummies
+    fastDummies (>= 1.6.3)
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 7.1.1
 Suggests: 
