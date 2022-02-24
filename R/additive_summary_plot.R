@@ -10,6 +10,7 @@
 additive_summary_plot <- function(additive_summary, ribbonFill = "grey80") {
 
   additive_summary$gamDf %>%
+    distinct() %>%
     ggplot() +
     geom_hline(yintercept = 0) +
     geom_ribbon(aes(x_j, ymin = fx_j_lo, ymax = fx_j_hi),
