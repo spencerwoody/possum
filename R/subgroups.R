@@ -11,8 +11,7 @@
 ##' 
 subgroup_average_posterior = function(posterior_samples, groups, weights = NULL) {
   
-  gpind = fastDummies::dummy_cols(data.frame(group = factor(groups)),
-                                  remove_selected_columns = TRUE)
+  gpind = fastDummies::dummy_cols(data.frame(group = factor(groups)))[,-1]
   gpind = as.matrix(gpind)
   
   colnames(gpind) = make.names(substring(colnames(gpind), first=7))
