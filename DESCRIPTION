@@ -13,7 +13,8 @@ Depends:
     stringr,
     fastDummies,
     rpart,
-    dplyr
+    dplyr,
+    RColorBrewer
 Imports: 
     Rcpp,
     ggplot2,
