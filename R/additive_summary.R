@@ -1,3 +1,28 @@
+
+make_grid <- function(df, quants=seq(0, 1, by=0.005)) {
+  require(dplyr)
+  
+  pen_num <- df %>% select(where(is.numeric))
+  pen_fac <- df %>% select(where(is.factor))
+  
+  pen_num_levels <- apply(pen_num, 2, quantile, probs=quants) %>% as.data.frame()
+  
+  if (ncol(pen_fac)==0) {
+    pen_levels <- pen_num_levels %>% select(colnames(df))
+  } else {
+    pen_fac_levels <- dplyr::distinct(pen_fac) %>% as.data.frame()
+    n1 <- nrow(pen_num_levels)
+    n2 <- nrow(pen_fac_levels)
+    pen_fac_levels <- pen_fac_levels %>% 
+      slice(rep(1:n(), each = ceiling(n1/n2))) %>% 
+      slice(1:n1)
+    pen_levels <- cbind(pen_num_levels, pen_fac_levels) %>% select(colnames(df))
+  }
+  
+  pen_levels
+  
+}
+
 ##' .. content for description{} (no empty lines) ..
 ##'
 ##' .. content for details{} ..
@@ -14,24 +39,36 @@
 ##' @return
 ##' @author Spencer Woody
 additive_summary <- function(summaryCall,
-                                   fhatSamples,
-                                   fhat = rowMeans(fhatSamples),
-                                   df = NULL,
-                                   ## terms = NULL,
-                                   grid_size = 100,
-                                   alpha = 0.05,
-                                   ribbonFill = "grey50",
-                                   return_samples = TRUE,
-                                   meta = NA,
-                                   verbose=FALSE
+                             fhatSamples,
+                             fhat = rowMeans(fhatSamples),
+                             df = NULL,
+                             ## terms = NULL,
+                             grid_size = 100,
+                             alpha = 0.05,
+                             ribbonFill = "grey50",
+                             return_samples = TRUE, 
+                             meta = NA,
+                             fast=TRUE, quants=seq(0, 1, by=0.005),
+                             verbose=FALSE
 )## function(fhatmat, df, gamFit, y, meta=NA,
 ## alpha = 0.10, ribbonFill = "grey50")
 {
   
-  ## TODO: improve formula interface by using update: update(. ~ u+v, res  ~ . ) #> res ~ u + v
+  if (fast) {
+    df_est <- make_grid(df, quants=quants)
+  } else {
+    df_est <- df
+  }
   
   
-  ## if (sapply(df, is.factor) %>% any()) warning("Looks like there are factors in your data.frame.\n If these, please be sure to explicitly ")
+  ## TODO: improve formula interface by using update: 
+  #update(. ~ u+v, res  ~ . ) #> res ~ u + v
+  
+  
+  if (sapply(df, is.factor) %>% any()) {
+    warning("Looks like there are factors in your data.frame.\n 
+            If so, please be sure to name them as factors explicitly in summary call")
+  }
   
   ## Rename... (y not needed?)
   
@@ -44,15 +81,17 @@ additive_summary <- function(summaryCall,
   
   if (verbose) cat("Extracting terms of summary...\n")
   
-  gamFitTerms <- predict(gamFit, type="terms")
+  gamFitTerms <- predict(gamFit, type="terms", newdata=df_est)
   
-  Xgam <- model.matrix(gamFit)
+  Xgam <- model.matrix(gamFit, newdata=df_est)
+  
+  Xgam_full <- model.matrix(gamFit)
   V <- vcov(gamFit, dispersion = 1)
-  Q <- crossprod(V, crossprod(Xgam, fhatSamples))
+  Q <- crossprod(V, crossprod(Xgam_full, fhatSamples))
   
   ## S <- Xgam %*% crossprod(V, t(Xgam))
   
-  fittedValues <- Xgam %*% Q
+  fittedValues <- Xgam_full %*% Q
   
   gamTerms <- attr(gamFit$terms, "term.labels")
   
@@ -65,7 +104,7 @@ additive_summary <- function(summaryCall,
   
   ## Loop through factor
   
-  cat("Looping through factors...\n")
+  if (verbose) cat("Looping through factors...\n")
   
   if (any(str_detect(gamTerms, "factor"))) {
     gamFactorTerms <- gamTerms[str_detect(gamTerms, "factor")]
@@ -101,7 +140,7 @@ additive_summary <- function(summaryCall,
   
   ## Loop through all other terms
   
-  cat("Looping through all other terms...\n")
+  if (verbose) cat("Looping through all other terms...\n")
   
   for (j in 1:length(gamTerms)) {
     
@@ -139,7 +178,7 @@ additive_summary <- function(summaryCall,
     
     gamDfList[[length(gamDfList) + 1]] <- data.frame(
       term = gamTerms[j],
-      x_j = df[, gamTerms[j]],
+      x_j = df_est[, gamTerms[j]],
       ## fx_j_mean = gamFitTerms[, which(str_detect(colnames(gamFitTerms), gamTerms[j]))],
       fx_j_mean = rowMeans(gamTermjPost),
       fx_j_lo = apply(gamTermjPost, 1, quantile, probs = alpha / 2),
@@ -150,7 +189,9 @@ additive_summary <- function(summaryCall,
       fx_j_hi80 = apply(gamTermjPost, 1, quantile, probs = 1 - 0.20 / 2),
       fx_j_lo50 = apply(gamTermjPost, 1, quantile, probs = 0.50 / 2),
       fx_j_hi50 = apply(gamTermjPost, 1, quantile, probs = 1 - 0.50 / 2),
-      fx_res=fhat-(rowSums(gamFitTerms[, !str_detect(colnames(gamFitTerms), gamTerms[j]),drop=FALSE]) + coef(gamFit)["(Intercept)"]),
+      # fx_res=fhat-(rowSums(gamFitTerms[, !str_detect(colnames(gamFitTerms), 
+      #                                                gamTerms[j]),drop=FALSE]) + 
+      #                coef(gamFit)["(Intercept)"]),
       meta = meta
     )
     
@@ -176,13 +217,17 @@ additive_summary <- function(summaryCall,
   
   for (jay in 1:num_triangles) {
     if (verbose) cat (sprintf("Triangle %i out of %i...\n", jay, num_triangles))
-    myx <- df %>% dplyr::pull(triangle_terms[jay])
-    triangleDfList[[jay]] <- triangle(myx, gamTerm[[triangle_terms[jay]]]) %>% mutate(term = triangle_terms[jay])
+    myx <- df_est %>% dplyr::pull(triangle_terms[jay])
+    triangleDfList[[jay]] <- triangle(myx, gamTerm[[triangle_terms[jay]]]) %>% 
+      mutate(term = triangle_terms[jay])
   }
   
   triangleDf <- triangleDfList %>% plyr::rbind.fill()
   
   # cat("Correlation of summary with original fit:", round(sqrt(summary(gamFit)$r.sq, 3), "\n"))
+  
+  cat(dim(fittedValues))
+  cat(dim(fhatSamples))
   
   ## Output
   out = list(
@@ -192,7 +237,7 @@ additive_summary <- function(summaryCall,
     ## gamPlot = gamPlot,
     gamFactorDf = gamFactorDf,
     fittedValues = fittedValues,
-    summaryRsq = rsqGamma(gamFitMat, fhatSamples),
+    summaryRsq = rsqGamma(fittedValues, fhatSamples),
     Xgam = Xgam,
     Q = Q,
     gamFitTerms = gamFitTerms,
