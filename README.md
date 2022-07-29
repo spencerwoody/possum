@@ -3,12 +3,12 @@
 
 POSterior SUMmarization
 
-<img src="https://www.abc.net.au/news/image/6598536-1x1-940x940.jpg" align="right" alt="Trichosurus vulpecula, native to Australia" width="200" />
+<img src="img/possum-sticker.png" align="right" alt="It's *possum*, not opossum" width="200" />
 
 This is an R package companion to the paper "Model interpretation
 through posterior summarization" by Spencer Woody, Carlos M. Carvalho,
 and Jared S. Murray, *Journal of Computational and Graphical
-Statistics*, 2020 ([link to JCGS paper][JCGS], [arXiv
+Statistics*, 2021 ([link to JCGS paper][JCGS], [arXiv
 preprint][arxiv]).
 
 ## Installation
