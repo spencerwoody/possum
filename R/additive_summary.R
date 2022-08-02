@@ -23,19 +23,25 @@ make_grid <- function(df, quants=seq(0, 1, by=0.005)) {
   
 }
 
-##' .. content for description{} (no empty lines) ..
+##' Compute posterior additive summary
 ##'
-##' .. content for details{} ..
+##' This function computes the point estimate and credible intervals for the summary of the function f. At a minimum, the user must specify the form of the summary, a matrix of posterior draws of f, and the dataframe which contains the inputs of f
 ##' @title additive_summary
+##'
 ##' @param summaryCall A gam fomula for the additive summary to be
 ##'   computed.  Should be in the form of fhat ~ s(x1) + s(x2) + ....
 ##'   See ?mgcv::formula.gam
-##' @param fhatSamples
-##' @param fhat
-##' @param df
-##' @param ribbonFill
+##' @param fhatSamples N \times NMC matrix of posterior draws of the function f, where N is the number of observations and NMC is the number of Monte Carlo posterior samples 
+##' @param fhat A point estimate (posterior mean) for the function f
+##' @param df The dataframe from which the summary will be computed. This should include all the inputs of f
+##' @param grid_size 
+##' @param alpha The function will return the alpha/2 and 1-alpha/2 credible intervals for the summary. 
+##' @param fast If TRUE, the function will compute the summary on a grid, specifically for quantiles of the covariates as specified in quants, of the data rather than for the whole dataset
+##' @param quants The quantiles of the covariates in df on which to compute the summary when fast=TRUE
+##' @param verbose If TRUE, the function will print out the progress of summary computation
+##' @param return_samples If TRUE, the function will of the design matrix for the summary 
 ##' @param meta
-##' @param verbose
+##'
 ##' @return
 ##' @author Spencer Woody
 additive_summary <- function(summaryCall,
@@ -43,13 +49,12 @@ additive_summary <- function(summaryCall,
                              fhat = rowMeans(fhatSamples),
                              df = NULL,
                              ## terms = NULL,
-                             grid_size = 100,
                              alpha = 0.05,
-                             ribbonFill = "grey50",
+                             fast=TRUE, quants=seq(0, 1, by=0.005),
+                             grid_size = 100,
+                             verbose=FALSE,
                              return_samples = TRUE, 
                              meta = NA,
-                             fast=TRUE, quants=seq(0, 1, by=0.005),
-                             verbose=FALSE
 )## function(fhatmat, df, gamFit, y, meta=NA,
 ## alpha = 0.10, ribbonFill = "grey50")
 {
