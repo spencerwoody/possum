@@ -11,9 +11,6 @@ average_posterior(posterior_samples, weights = NULL)
 
 \item{weights}{Optional weights, for computing a weighted subgroup average}
 }
-\value{
-
-}
 \description{
 Aggregate posterior draws by averaging
 }

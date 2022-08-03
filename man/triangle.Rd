@@ -6,9 +6,6 @@
 \usage{
 triangle(x, fsamples, num_quantiles = 100)
 }
-\value{
-
-}
 \description{
 .. content for description{} (no empty lines) ..
 }

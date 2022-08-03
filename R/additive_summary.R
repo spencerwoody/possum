@@ -40,10 +40,11 @@ make_grid <- function(df, quants=seq(0, 1, by=0.005)) {
 ##' @param quants The quantiles of the covariates in df on which to compute the summary when fast=TRUE
 ##' @param verbose If TRUE, the function will print out the progress of summary computation
 ##' @param return_samples If TRUE, the function will of the design matrix for the summary 
-##' @param meta
+##' @param meta A tag for the dataframe of the summary 
 ##'
 ##' @return
 ##' @author Spencer Woody
+##' @export
 additive_summary <- function(summaryCall,
                              fhatSamples,
                              fhat = rowMeans(fhatSamples),
@@ -54,7 +55,7 @@ additive_summary <- function(summaryCall,
                              grid_size = 100,
                              verbose=FALSE,
                              return_samples = TRUE, 
-                             meta = NA,
+                             meta = NA
 )## function(fhatmat, df, gamFit, y, meta=NA,
 ## alpha = 0.10, ribbonFill = "grey50")
 {
@@ -247,6 +248,7 @@ additive_summary <- function(summaryCall,
     Q = Q,
     gamFitTerms = gamFitTerms,
     triangleDf = triangleDf,
+    df=df,
     call = summaryCall
   )
   

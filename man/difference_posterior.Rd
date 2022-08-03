@@ -13,9 +13,6 @@ difference_posterior(posterior_samples, ref_col = 1, remove_ref = TRUE)
 
 \item{remove_ref}{Remove the column of zeros corresponding to the reference column}
 }
-\value{
-
-}
 \description{
 Difference_posterior
 }

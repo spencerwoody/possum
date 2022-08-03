@@ -7,16 +7,15 @@
 additive_summary_plot(additive_summary, ribbonFill = "grey80")
 }
 \arguments{
-\item{ribbonFill}{}
-}
-\value{
+\item{additive_summary}{Output of additive_summary}
 
+\item{ribbonFill}{An optional argument for the color of the credible interval}
 }
 \description{
-Plots the results of an additive summary
+Plot additive summary
 }
 \details{
-Plots the partial/adjusted effect curves from an additive summary
+Plots the partial/adjusted effect curves from additive_summary
 }
 \author{
 Spencer Woody

@@ -21,9 +21,6 @@ by the postserior mean}
 
 \item{...}{other arguments, e.g., to glmnet}
 }
-\value{
-
-}
 \description{
 This is like DSS
 }

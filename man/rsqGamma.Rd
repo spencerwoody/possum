@@ -12,9 +12,6 @@ rsqGamma(gamma, fhat)
 \item{fhat}{fitted values from regression function (vector or
 matrix)}
 }
-\value{
-
-}
 \description{
 Description
 }

@@ -1,11 +1,12 @@
 
-##' Plots the results of an additive summary
+##' Plot additive summary
 ##'
-##' Plots the partial/adjusted effect curves from an additive summary
+##' Plots the partial/adjusted effect curves from additive_summary
 ##' @title Plot an additive summary
-##' @param additive_summary
-##' @param ribbonFill 
+##' @param additive_summary Output of additive_summary
+##' @param ribbonFill An optional argument for the color of the credible interval
 ##' @return
+##' @export
 ##' @author Spencer Woody
 additive_summary_plot <- function(additive_summary, ribbonFill = "grey80") {
 

@@ -50,7 +50,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/california-housing.html">Additive summary of a nonparametric regression model: California housing price example</a>
+      <a href="../articles/california-housing.html">Summarizing nonparametric regression models: California housing price example</a>
     </li>
     <li>
       <a href="../articles/nonpara-sparse-linear-summary.html">Sparse linear summaries for nonparametric regression models</a>
@@ -146,6 +146,10 @@ regression models</h1>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">420</span><span class="op">)</span></span>
 <span></span>
+<span><span class="va">mybayes</span><span class="op">&lt;-</span><span class="fu">horseshoe</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/horseshoe/man/horseshoe.html" class="external-link">horseshoe</a></span><span class="op">(</span><span class="va">y</span>, <span class="va">X</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">mybayes</span><span class="op">)</span></span>
+<span><span class="va">betaSamp</span><span class="op">&lt;-</span><span class="va">mybayes</span><span class="op">$</span><span class="va">BetaSamples</span></span>
+<span></span>
 <span><span class="va">cbart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dbarts/man/bart.html" class="external-link">bart</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">sigma2Samples</span> <span class="op">&lt;-</span> <span class="va">cbart</span><span class="op">$</span><span class="va">sigma</span><span class="op">^</span><span class="fl">2</span></span>
@@ -164,6 +168,10 @@ regression models</h1>
 <span><span class="co">## devtools::load_all()</span></span>
 <span></span>
 <span><span class="va">lin</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sparseLinearSummary.html">sparseLinearSummary</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">fhatmat</span>, <span class="va">y</span>, <span class="va">sigma2Samples</span>, varnames <span class="op">=</span> <span class="va">varnames</span><span class="op">)</span></span>
+<span><span class="va">lin2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sparse_linear_summary.html">sparse_linear_summary</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, betaSamples <span class="op">=</span> <span class="va">betaSamp</span>, sigma2Samples<span class="op">=</span><span class="va">sigma2Samples</span>, varnames <span class="op">=</span> <span class="va">varnames</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">lin</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sparse_linear_summary.html">sparse_linear_summary</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">fhatmat</span>, varnames <span class="op">=</span> <span class="va">varnames</span><span class="op">)</span></span>
+<span><span class="va">lin2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sparse_linear_summary.html">sparse_linear_summary</a></span><span class="op">(</span><span class="va">X</span>, betaSamples <span class="op">=</span> <span class="va">betaSamp</span>, varnames <span class="op">=</span> <span class="va">varnames</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">lin</span><span class="op">)</span></span>
 <span></span>
@@ -184,19 +192,19 @@ regression models</h1>
 <span><span class="co">#&gt; <span style="color: #949494;"># Groups:   modelSize [1]</span></span></span>
 <span><span class="co">#&gt;    modelSize varname    mid      lo      hi</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 7         Po1      0.693  0.492   0.850 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 7         Ineq     0.487  0.239   0.671 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 7         Ed       0.501  0.303   0.641 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 7         M        0.260  0.121   0.367 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 7         Prob    -<span style="color: #BB0000;">0.193</span> -<span style="color: #BB0000;">0.293</span>  -<span style="color: #BB0000;">0.068</span><span style="color: #BB0000; text-decoration: underline;">7</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 7         NW       0.180  0.052<span style="text-decoration: underline;">7</span>  0.322 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 7         U2       0.172  0.065<span style="text-decoration: underline;">8</span>  0.266 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 7         Po1      0.681  0.468   0.848 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 7         Ineq     0.475  0.205   0.656 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 7         Ed       0.498  0.310   0.646 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 7         Prob    -<span style="color: #BB0000;">0.193</span> -<span style="color: #BB0000;">0.296</span>  -<span style="color: #BB0000;">0.066</span><span style="color: #BB0000; text-decoration: underline;">8</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 7         M        0.254  0.121   0.372 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 7         NW       0.186  0.053<span style="text-decoration: underline;">8</span>  0.333 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 7         U2       0.170  0.044<span style="text-decoration: underline;">7</span>  0.275 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 7         Pop      0      0       0     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 7         GDP      0      0       0     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 7         M.F      0      0       0     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 7         U1       0      0       0     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 7         Time     0      0       0     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 7         LF       0      0       0     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 7         M.F      0      0       0     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 7         U1       0      0       0     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 7         GDP      0      0       0     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 7         LF       0      0       0     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 7         Time     0      0       0     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 7         Po2      0      0       0     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 7         So       0      0       0</span></span>
 <span></span>

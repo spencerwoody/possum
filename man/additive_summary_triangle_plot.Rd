@@ -6,9 +6,6 @@
 \usage{
 additive_summary_triangle_plot(possum1)
 }
-\value{
-
-}
 \description{
 .. content for description{} (no empty lines) ..
 }

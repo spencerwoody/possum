@@ -6,9 +6,6 @@
 \usage{
 rsq(y, yhat)
 }
-\value{
-
-}
 \description{
 .. content for description{} (no empty lines) ..
 }

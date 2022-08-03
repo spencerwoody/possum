@@ -13,9 +13,6 @@ phiGamma(y, gamma, sigma)
 
 \item{sigma}{}
 }
-\value{
-
-}
 \description{
 Inflation of sigma
 }
