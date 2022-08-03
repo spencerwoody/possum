@@ -2,15 +2,20 @@
 % Please edit documentation in R/additive_summary_triangle_plot.R
 \name{additive_summary_triangle_plot}
 \alias{additive_summary_triangle_plot}
-\title{Triangle}
+\title{Plot summary gradient}
 \usage{
-additive_summary_triangle_plot(possum1, windsor = NA)
+additive_summary_triangle_plot(additive_summary, windsor = NA)
+}
+\arguments{
+\item{additive_summary}{Output of additive_summary}
+
+\item{windsor}{windsor "Windsorized" summary, which removes the top and bottom windsor/2 quantiles of each covariate}
 }
 \description{
-.. content for description{} (no empty lines) ..
+Plot summary gradient
 }
 \details{
-.. content for details{} ..
+Create plot of posterior probability for positive/negative gradient in the summary curves
 }
 \author{
 Spencer Woody

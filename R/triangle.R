@@ -1,12 +1,5 @@
-##' .. content for description{} (no empty lines) ..
-##'
-##' .. content for details{} ..
-##' @title Triangles
-##' @param x
-##' @param fsamples
-##' @param num_quantiles
-##' @return
-##' @author Spencer Woody
+
+
 triangle <- function(x, fsamples, num_quantiles = 200) {
   
   if (length(unique(x)) < num_quantiles) {

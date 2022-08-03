@@ -81,7 +81,7 @@ fhatmat <- t(cbart$yhat.train)
 
 ## devtools::load_all()
 
-lin <- sparseLinearSummary(X, fhatmat, y, sigma2Samples, varnames = varnames)
+
 lin2 <- sparse_linear_summary(X, y, betaSamples = betaSamp, sigma2Samples=sigma2Samples, varnames = varnames)
 
 lin <- sparse_linear_summary(X, fhatmat, varnames = varnames)

@@ -1,14 +1,18 @@
-##' .. content for description{} (no empty lines) ..
+##' Plot summary gradient
 ##'
-##' .. content for details{} ..
-##' @title Triangle
+##' Create plot of posterior probability for positive/negative gradient in the summary curves
+##'
+##' @param additive_summary Output of additive_summary
+##' @param windsor windsor "Windsorized" summary, which removes the top and bottom windsor/2 quantiles of each covariate
+##'
+##' @title Plot summary gradient
 ##' @return
 ##' @author Spencer Woody
 ##'
 ##' @export
-additive_summary_triangle_plot <- function(possum1, windsor=NA) {
+additive_summary_triangle_plot <- function(additive_summary, windsor=NA) {
 
-  temp<-possum1$triangleDf
+  temp<-additive_summary$triangleDf
   
   if (!is.na(windsor)) {
     temp <- temp %>% 
