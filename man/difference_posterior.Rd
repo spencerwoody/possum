@@ -2,20 +2,20 @@
 % Please edit documentation in R/subgroups.R
 \name{difference_posterior}
 \alias{difference_posterior}
-\title{Title}
+\title{Difference_posterior}
 \usage{
 difference_posterior(posterior_samples, ref_col = 1, remove_ref = TRUE)
 }
 \arguments{
-\item{posterior_samples}{}
+\item{posterior_samples}{Set of posterior samples}
 
-\item{ref_col}{}
+\item{ref_col}{Differences are taken as (each column) - (ref_col)}
 
-\item{remove_ref}{}
+\item{remove_ref}{Remove the column of zeros corresponding to the reference column}
 }
 \value{
 
 }
 \description{
-Title
+Difference_posterior
 }

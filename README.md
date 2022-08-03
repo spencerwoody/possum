@@ -1,28 +1,25 @@
 
-# possum
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# possum <img src="man/figures/possum-sticker.png" align="right" alt="" width="120" />
 
 POSterior SUMmarization
 
-<img src="img/possum-sticker.png" align="right" alt="It's *possum*, not opossum" width="200" />
-
-This is an R package companion to the paper "Model interpretation
-through posterior summarization" by Spencer Woody, Carlos M. Carvalho,
+This is an R package companion to the paper “Model interpretation
+through posterior summarization” by Spencer Woody, Carlos M. Carvalho,
 and Jared S. Murray, *Journal of Computational and Graphical
-Statistics*, 2021 ([link to JCGS paper][JCGS], [arXiv
-preprint][arxiv]).
+Statistics*, 2021 ([link to JCGS
+paper](https://www.tandfonline.com/doi/abs/10.1080/10618600.2020.1796684?journalCode=ucgs20),
+[arXiv preprint](https://arxiv.org/abs/1905.07103)).
 
 ## Installation
 
-```r
+``` r
 ## install.packages("devtools")
 devtools::install_github("spencerwoody/possum")
 ```
 
 ## Contact
 
-[Spencer Woody][sw]  
+[Spencer Woody](https://spencerwoody.github.io/)  
 `spencer(dot)woody(at)utexas(dot)edu`
-
-[arxiv]: https://arxiv.org/abs/1905.07103
-[JCGS]: https://www.tandfonline.com/doi/abs/10.1080/10618600.2020.1796684?journalCode=ucgs20
-[sw]: https://spencerwoody.github.io/

@@ -89,8 +89,8 @@ Now, we estimate and plot the summary.
 length(yhat)
 dim(yhatSamples) #NOTE: Each *column* is a posterior draw
 
-
-mypossum <- additive_summary_local(summaryform, yhatSamples, yhat, califDf, verbose=TRUE)
+# mypossum <- additive_summary_fast(summaryform, yhatSamples, yhat, califDf, verbose=TRUE)
+mypossum <- additive_summary(summaryform, yhatSamples, yhat, califDf, verbose=TRUE)
 
 additive_summary_plot(mypossum)
 
