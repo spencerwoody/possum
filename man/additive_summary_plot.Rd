@@ -4,12 +4,14 @@
 \alias{additive_summary_plot}
 \title{Plot an additive summary}
 \usage{
-additive_summary_plot(additive_summary, ribbonFill = "grey80")
+additive_summary_plot(additive_summary, ribbonFill = "grey80", windsor = NA)
 }
 \arguments{
 \item{additive_summary}{Output of additive_summary}
 
 \item{ribbonFill}{An optional argument for the color of the credible interval}
+
+\item{windsor}{"Windsorized" summary, which removes the top and bottom windsor/2 quantiles of each covariate. Only available if "quants" present in the posterior summary}
 }
 \description{
 Plot additive summary

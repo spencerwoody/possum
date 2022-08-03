@@ -198,7 +198,8 @@ additive_summary <- function(summaryCall,
       # fx_res=fhat-(rowSums(gamFitTerms[, !str_detect(colnames(gamFitTerms), 
       #                                                gamTerms[j]),drop=FALSE]) + 
       #                coef(gamFit)["(Intercept)"]),
-      meta = meta
+      meta = meta,
+      Row = rownames(df_est)
     )
     
   }
@@ -209,7 +210,13 @@ additive_summary <- function(summaryCall,
   
   gamDf <- plyr::rbind.fill(gamDfList)
   
+  if (fast==TRUE) {
+    gamDf <- gamDf %>% 
+      mutate(quant = str_sub(Row, 1, -2)) %>% 
+      mutate(quant=as.numeric(quant)/100)
+  } 
   
+  gamDf <- gamDf %>% select(-Row)
   
   ## Triangle
   triangle_terms <- gamTerms
@@ -224,8 +231,14 @@ additive_summary <- function(summaryCall,
   for (jay in 1:num_triangles) {
     if (verbose) cat (sprintf("Triangle %i out of %i...\n", jay, num_triangles))
     myx <- df_est %>% dplyr::pull(triangle_terms[jay])
-    triangleDfList[[jay]] <- triangle(myx, gamTerm[[triangle_terms[jay]]]) %>% 
-      mutate(term = triangle_terms[jay])
+    if (fast == TRUE) {
+      triangleDfList[[jay]] <- triangle_fast(myx, gamTerm[[triangle_terms[jay]]], 
+                                             as.numeric(str_sub(rownames(df_est), 1, -2))/100) %>% 
+        mutate(term = triangle_terms[jay])
+    } else {
+      triangleDfList[[jay]] <- triangle(myx, gamTerm[[triangle_terms[jay]]]) %>% 
+        mutate(term = triangle_terms[jay])
+    }
   }
   
   triangleDf <- triangleDfList %>% plyr::rbind.fill()

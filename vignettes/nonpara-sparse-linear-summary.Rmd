@@ -62,6 +62,10 @@ varnamesDf <- data.frame(
 ```{r bart, message=FALSE, warning=FALSE, results='hide'}
 set.seed(420)
 
+mybayes<-horseshoe::horseshoe(y, X)
+names(mybayes)
+betaSamp<-mybayes$BetaSamples
+
 cbart <- bart(X, y)
 
 sigma2Samples <- cbart$sigma^2
@@ -78,6 +82,10 @@ fhatmat <- t(cbart$yhat.train)
 ## devtools::load_all()
 
 lin <- sparseLinearSummary(X, fhatmat, y, sigma2Samples, varnames = varnames)
+lin2 <- sparse_linear_summary(X, y, betaSamples = betaSamp, sigma2Samples=sigma2Samples, varnames = varnames)
+
+lin <- sparse_linear_summary(X, fhatmat, varnames = varnames)
+lin2 <- sparse_linear_summary(X, betaSamples = betaSamp, varnames = varnames)
 
 names(lin)
 

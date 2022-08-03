@@ -4,7 +4,7 @@
 \alias{additive_summary_triangle_plot}
 \title{Triangle}
 \usage{
-additive_summary_triangle_plot(possum1)
+additive_summary_triangle_plot(possum1, windsor = NA)
 }
 \description{
 .. content for description{} (no empty lines) ..

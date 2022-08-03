@@ -6,9 +6,17 @@
 ##' @author Spencer Woody
 ##'
 ##' @export
-additive_summary_triangle_plot <- function(possum1) {
+additive_summary_triangle_plot <- function(possum1, windsor=NA) {
 
-  possum1$triangleDf %>%
+  temp<-possum1$triangleDf
+  
+  if (!is.na(windsor)) {
+    temp <- temp %>% 
+      filter(u > windsor/2 & u < 1-windsor/2) %>% 
+      filter(l > windsor/2 & l < 1-windsor/2)
+  }
+  
+  temp %>%
   ggplot() +
   geom_raster(aes(l, u, fill = prob)) +
   facet_wrap(~term) +

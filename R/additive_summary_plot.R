@@ -5,12 +5,24 @@
 ##' @title Plot an additive summary
 ##' @param additive_summary Output of additive_summary
 ##' @param ribbonFill An optional argument for the color of the credible interval
+##' @param windsor "Windsorized" summary, which removes the top and bottom windsor/2 quantiles of each covariate. Only available if "quants" present in the posterior summary
 ##' @return
 ##' @export
 ##' @author Spencer Woody
-additive_summary_plot <- function(additive_summary, ribbonFill = "grey80") {
+additive_summary_plot <- function(additive_summary, ribbonFill = "grey80",
+                                  windsor=NA) {
 
-  additive_summary$gamDf %>%
+  temp<-additive_summary$gamDf
+  
+  if (!is.na(windsor)) {
+    if (!("quant" %in% colnames(temp))) {
+      stop("Quantiles not supplied") 
+    }
+    temp <- temp %>% filter(quant > windsor/2 & quant < 1-windsor/2)
+    glimpse(temp)
+  }
+  
+   temp %>%
     distinct() %>%
     ggplot() +
     geom_hline(yintercept = 0) +

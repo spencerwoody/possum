@@ -4,7 +4,7 @@
 \alias{triangle}
 \title{Triangles}
 \usage{
-triangle(x, fsamples, num_quantiles = 100)
+triangle(x, fsamples, num_quantiles = 200)
 }
 \description{
 .. content for description{} (no empty lines) ..

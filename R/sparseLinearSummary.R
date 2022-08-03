@@ -50,9 +50,6 @@ sparseLinearSummary <-
     )
 
     ## Posterior mean of fitted value for y (X %*% betabar)
-    
-    
-    ## yhatSamples <- X %*% betaSamples
 
     yFit <- rowMeans(fhatmat)
 
