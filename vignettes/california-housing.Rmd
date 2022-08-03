@@ -1,5 +1,5 @@
 ---
-title: "Using the `possum` package: California housing price example"
+title: "Summarizing nonparametric regression models: California housing price example"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Using the `possum` package: California housing price example}
@@ -18,12 +18,11 @@ knitr::opts_chunk$set(
 library(ggplot2)
 library(dplyr)
 library(stringr)
-library(cowplot)
-theme_set(theme_minimal_grid())
-library(mgcv)
 library(dbarts)
 library(possum)
 
+library(cowplot) # Better default plotting
+theme_set(theme_minimal_grid())
 
 ```
 

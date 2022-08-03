@@ -3,14 +3,13 @@
 
 # possum <img src="man/figures/possum-sticker.png" align="right" alt="" width="120" />
 
-POSterior SUMmarization
-
-This is an R package companion to the paper “Model interpretation
-through posterior summarization” by Spencer Woody, Carlos M. Carvalho,
-and Jared S. Murray, *Journal of Computational and Graphical
-Statistics*, 2021 ([link to JCGS
-paper](https://www.tandfonline.com/doi/abs/10.1080/10618600.2020.1796684?journalCode=ucgs20),
-[arXiv preprint](https://arxiv.org/abs/1905.07103)).
+possum is a system for interpreting “black box” models through POSterior
+SUMmarization, as described by Woody, Carvalho, and Murray (2021; see
+[*JCGS*
+paper](https://www.tandfonline.com/doi/abs/10.1080/10618600.2020.1796684?journalCode=ucgs20)
+or [arXiv preprint](https://arxiv.org/abs/1905.07103)). You simply
+provide the data inputs for your model and the model results, and possum
+will print out a model summary.
 
 ## Installation
 
