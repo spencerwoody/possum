@@ -1,7 +1,7 @@
 Package: possum
 Type: Package
 Title: Model interpretation using using lower-dimensional posterior summarization
-Version: 0.2.1
+Version: 0.3
 Date: 2022-02-24
 Author: Spencer Woody, Carlos Carvalho, and Jared Murray
 Maintainer: Spencer Woody <spencer.woody@utexas.edu>
